@@ -1,0 +1,13 @@
+{
+  "name": "temi-luxe-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "live-server --open=./index.html --port=5173",
+    "verify:images": "node ./scripts/verify-images.js",
+    "images:generate": "node ./scripts/generate-webp.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.32.0"
+  }
+}

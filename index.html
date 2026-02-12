@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Temi Luxe — Luxury accessories handcrafted for modern living." />
+  <title>Temi Luxe — Luxury Accessories</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="#" aria-label="Temi Luxe home"><img src="assets/logo.svg" alt="Temi Luxe logo"></a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
+        <ul id="primary-navigation" class="nav-list">
+          <li><a href="#collections">Collections</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn" href="#shop">Shop</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="cart-toggle" aria-expanded="false" aria-controls="site-cart" aria-label="Open cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l.9 5.5a3 3 0 0 0 3 2.5h7.2a3 3 0 0 0 3-2.5L21 6H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cart-count" aria-hidden="true">0</span>
+        </button>
+        <span id="cart-status" class="sr-only" aria-live="polite">0 items in cart</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Temi Luxe hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Temi Luxe</h1>
+          <p class="lede">Timeless handcrafted accessories — elevated materials, modern silhouettes.</p>
+          <p class="cta-row">
+            <a class="btn btn-primary" href="#shop">Shop the collection</a>
+            <a class="btn btn-ghost" href="#about">Our story</a>
+          </p>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/hero.svg" alt="Decorative product composition">
+        </div>
+      </div>
+    </section>
+
+    <section id="collections" class="section">
+      <div class="container">
+        <h2 class="section-title">Featured pieces</h2>
+        <p class="section-sub">Curated from premium leather and precious hardware.</p>
+        <div class="products-grid" id="shop" role="list">
+
+          <article class="product-card" role="listitem" data-id="clutch-001" data-name="Classic Clutch" data-price="240" data-colors="tan,black,oxblood" data-desc="Hand-stitched Italian leather — 3 colorways">
+            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Classic clutch"></div>
+            <div class="product-body">
+              <h3 class="product-name">Classic Clutch</h3>
+              <p class="price">$240</p>
+              <p class="muted product-desc">Hand-stitched Italian leather — 3 colorways</p>
+
+              <div class="product-meta">
+                <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                  <label class="swatch" title="Tan">
+                    <input type="radio" name="color-clutch-001" value="tan" checked>
+                    <span class="swatch-dot" style="background:#c9a582" aria-hidden="true"></span>
+                  </label>
+                  <label class="swatch" title="Black">
+                    <input type="radio" name="color-clutch-001" value="black">
+                    <span class="swatch-dot" style="background:#111" aria-hidden="true"></span>
+                  </label>
+                  <label class="swatch" title="Oxblood">
+                    <input type="radio" name="color-clutch-001" value="oxblood">
+                    <span class="swatch-dot" style="background:#5b1b18" aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="qty-wrap">
+                  <label class="sr-only" for="qty-clutch-001">Quantity</label>
+                  <input id="qty-clutch-001" class="qty" type="number" min="1" value="1" aria-label="Quantity">
+                </div>
+              </div>
+
+              <p class="actions-row">
+                <button class="btn btn-primary add-to-cart" data-product-id="clutch-001">Add to cart</button>
+                <a class="btn btn-ghost" href="product-clutch.html">View</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="product-card" role="listitem" data-id="belt-002" data-name="Signature Belt" data-price="180" data-colors="tan,black" data-desc="Antique brass buckle — made to last">
+            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Signature belt"></div>
+            <div class="product-body">
+              <h3 class="product-name">Signature Belt</h3>
+              <p class="price">$180</p>
+              <p class="muted product-desc">Antique brass buckle — made to last</p>
+
+              <div class="product-meta">
+                <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                  <label class="swatch"><input type="radio" name="color-belt-002" value="tan" checked><span class="swatch-dot" style="background:#c9a582"></span></label>
+                  <label class="swatch"><input type="radio" name="color-belt-002" value="black"><span class="swatch-dot" style="background:#111"></span></label>
+                </div>
+                <div class="qty-wrap"><input class="qty" type="number" min="1" value="1" aria-label="Quantity"></div>
+              </div>
+
+              <p class="actions-row">
+                <button class="btn btn-primary add-to-cart" data-product-id="belt-002">Add to cart</button>
+                <a class="btn btn-ghost" href="product-belt.html">View</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="product-card" role="listitem" data-id="tote-003" data-name="Everyday Tote" data-price="320" data-colors="black,stone" data-desc="Roomy, structured, elegant">
+            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Everyday tote"></div>
+            <div class="product-body">
+              <h3 class="product-name">Everyday Tote</h3>
+              <p class="price">$320</p>
+              <p class="muted product-desc">Roomy, structured, elegant</p>
+
+              <div class="product-meta">
+                <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                  <label class="swatch"><input type="radio" name="color-tote-003" value="black" checked><span class="swatch-dot" style="background:#111"></span></label>
+                  <label class="swatch"><input type="radio" name="color-tote-003" value="stone"><span class="swatch-dot" style="background:#e6dbcf"></span></label>
+                </div>
+                <div class="qty-wrap"><input class="qty" type="number" min="1" value="1" aria-label="Quantity"></div>
+              </div>
+
+              <p class="actions-row">
+                <button class="btn btn-primary add-to-cart" data-product-id="tote-003">Add to cart</button>
+                <a class="btn btn-ghost" href="product-tote.html">View</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="product-card" role="listitem" data-id="wallet-004" data-name="Mini Wallet" data-price="95" data-colors="black,oxblood" data-desc="Slim profile — RFID lining">
+            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Mini wallet"></div>
+            <div class="product-body">
+              <h3 class="product-name">Mini Wallet</h3>
+              <p class="price">$95</p>
+              <p class="muted product-desc">Slim profile — RFID lining</p>
+
+              <div class="product-meta">
+                <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                  <label class="swatch"><input type="radio" name="color-wallet-004" value="black" checked><span class="swatch-dot" style="background:#111"></span></label>
+                  <label class="swatch"><input type="radio" name="color-wallet-004" value="oxblood"><span class="swatch-dot" style="background:#5b1b18"></span></label>
+                </div>
+                <div class="qty-wrap"><input class="qty" type="number" min="1" value="1" aria-label="Quantity"></div>
+              </div>
+
+              <p class="actions-row">
+                <button class="btn btn-primary add-to-cart" data-product-id="wallet-004">Add to cart</button>
+                <a class="btn btn-ghost" href="product-wallet.html">View</a>
+              </p>
+            </div>
+          </article>
+
+          <!-- new products: Earrings + Ring -->
+          <article class="product-card" role="listitem" data-id="earrings-005" data-name="Petite Hoops" data-price="120" data-colors="gold,silver" data-desc="Lightweight artisan hoops">
+            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Petite Hoops"></div>
+            <div class="product-body">
+              <h3 class="product-name">Petite Hoops</h3>
+              <p class="price">$120</p>
+              <p class="muted product-desc">Lightweight artisan hoops — polished finish.</p>
+
+              <div class="product-meta">
+                <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                  <label class="swatch"><input type="radio" name="color-earrings-005" value="gold" checked><span class="swatch-dot" style="background:#d4af37"></span></label>
+                  <label class="swatch"><input type="radio" name="color-earrings-005" value="silver"><span class="swatch-dot" style="background:#cfcfcf"></span></label>
+                </div>
+                <div class="qty-wrap"><input class="qty" type="number" min="1" value="1" aria-label="Quantity"></div>
+              </div>
+
+              <p class="actions-row">
+                <button class="btn btn-primary add-to-cart" data-product-id="earrings-005">Add to cart</button>
+                <a class="btn btn-ghost" href="product-earrings.html">View</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="product-card" role="listitem" data-id="ring-006" data-name="Signet Ring" data-price="150" data-colors="gold,silver" data-desc="Bold low-profile signet">
+            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Signet Ring"></div>
+            <div class="product-body">
+              <h3 class="product-name">Signet Ring</h3>
+              <p class="price">$150</p>
+              <p class="muted product-desc">Bold low-profile signet — classic finish.</p>
+
+              <div class="product-meta">
+                <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                  <label class="swatch"><input type="radio" name="color-ring-006" value="gold" checked><span class="swatch-dot" style="background:#d4af37"></span></label>
+                  <label class="swatch"><input type="radio" name="color-ring-006" value="silver"><span class="swatch-dot" style="background:#cfcfcf"></span></label>
+                </div>
+                <div class="qty-wrap"><input class="qty" type="number" min="1" value="1" aria-label="Quantity"></div>
+              </div>
+
+              <p class="actions-row">
+                <button class="btn btn-primary add-to-cart" data-product-id="ring-006">Add to cart</button>
+                <a class="btn btn-ghost" href="product-ring.html">View</a>
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section bg-ivory">
+      <div class="container about-grid">
+        <div>
+          <h2>Our craft</h2>
+          <p>At Temi Luxe we combine traditional techniques with modern design. Each piece is responsibly sourced and hand-finished in small batches.</p>
+          <ul class="list-check">
+            <li>Small-batch production</li>
+            <li>Sustainably sourced materials</li>
+            <li>Lifetime repairs</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Visit us</h3>
+          <p>Flagship by appointment — email <a href="mailto:hello@temiluxe.example">hello@temiluxe.example</a> to book.</p>
+          <h3 id="contact">Stay in touch</h3>
+          <form id="newsletter" class="form-newsletter" aria-label="Subscribe to newsletter">
+            <label for="email" class="sr-only">Email</label>
+            <input id="email" name="email" type="email" placeholder="Email address" required>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+            <p id="newsletter-msg" class="muted small"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© Temi Luxe — Crafted with care.</p>
+      <p class="muted">Follow us — <a href="#">Instagram</a> · <a href="#">Pinterest</a> · <a href="manage-notifications.html">Manage notifications</a></p>
+    </div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <aside id="site-cart" class="site-cart" role="dialog" aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart-inner">
+      <header class="cart-head">
+        <h3>Your cart</h3>
+        <button class="cart-close" aria-label="Close cart">×</button>
+      </header>
+      <div id="cart-items" class="cart-items" role="list"> <!-- populated by JS -->
+        <p class="muted small">Your cart is empty.</p>
+      </div>
+      <footer class="cart-foot">
+        <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+        <div class="cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+        <div class="cart-actions">
+          <button class="btn" id="checkout-btn">Checkout (demo)</button>
+        </div>
+      </footer>
+    </div>
+    <div id="cart-toast" class="cart-toast" aria-live="polite"></div>
+  </aside>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

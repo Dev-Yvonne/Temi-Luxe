@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Signet Ring — Temi Luxe</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Temi Luxe home"><img src="assets/logo.svg" alt="Temi Luxe logo"></a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="product-detail" id="product-detail" data-id="ring-006" data-name="Signet Ring" data-price="150" data-stock="5" data-colors="gold,silver">
+        <div class="product-grid">
+          <div class="gallery">
+            <div class="gallery-main" tabindex="0" aria-label="Product image" role="img">
+              <img id="gallery-current" src="assets/product-placeholder.svg" alt="Signet Ring" data-highres="assets/ring-1@2x.svg">
+            </div>
+            <div class="gallery-thumbs" role="tablist" aria-label="Product thumbnails">
+              <button class="thumb" data-src="assets/ring-1.svg" data-highres="assets/ring-1@2x.svg" aria-label="View image 1"><img src="assets/product-placeholder.svg" alt=""></button>
+              <button class="thumb" data-src="assets/ring-2.svg" data-highres="assets/ring-2@2x.svg" aria-label="View image 2"><img src="assets/product-placeholder.svg" alt=""></button>
+            </div>
+          </div>
+
+          <div class="product-info">
+            <h1>Signet Ring</h1>
+            <p class="price">$150</p>
+            <p class="muted product-desc">Bold low-profile signet.</p>
+
+            <div class="meta-row">
+              <div>
+                <strong>Material</strong>
+                <p class="muted">Gold-plate / sterling silver</p>
+              </div>
+              <div>
+                <strong>Availability</strong>
+                <p id="pd-stock" class="muted">Checking…</p>
+              </div>
+            </div>
+
+            <div class="product-meta" style="margin-top:1rem;">
+              <div class="color-choices" role="radiogroup" aria-label="Available colours">
+                <label class="swatch"><input type="radio" name="pd-color" value="gold" checked><span class="swatch-dot" style="background:#d4af37"></span></label>
+                <label class="swatch"><input type="radio" name="pd-color" value="silver"><span class="swatch-dot" style="background:#cfcfcf"></span></label>
+              </div>
+              <div class="qty-wrap"><label class="sr-only" for="pd-qty">Quantity</label><input id="pd-qty" class="qty" type="number" min="1" value="1" aria-label="Quantity"></div>
+            </div>
+
+            <div style="margin-top:1rem;display:flex;gap:.6rem;align-items:center">
+              <button class="btn btn-primary add-to-cart" id="pd-add">Add to cart</button>
+            </div>
+
+            <section class="pad-top">
+              <h3>Details</h3>
+              <p>Classic signet with low profile — suitable for everyday wear.</p>
+
+              <h4>Material & care</h4>
+              <ul>
+                <li>Gold-plate / sterling silver</li>
+                <li>Keep dry; polish lightly</li>
+              </ul>
+
+              <h4>Stock & shipping</h4>
+              <p class="muted">Ships within 1–3 business days.</p>
+            </section>
+
+          </div>
+        </div>
+
+        <div id="zoom-modal" class="zoom-modal" aria-hidden="true" role="dialog" aria-label="Image viewer">
+          <button class="zoom-close" aria-label="Close viewer">×</button>
+          <div class="zoom-stage"><img src="assets/product-placeholder.svg" alt=""></div>
+          <div class="zoom-controls" aria-hidden="true"><button class="zoom-prev">‹</button><button class="zoom-next">›</button></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© Temi Luxe — Crafted with care.</p>
+      <p class="muted">Follow us — <a href="#">Instagram</a> · <a href="#">Pinterest</a> · <a href="manage-notifications.html">Manage notifications</a></p>
+    </div>
+  </footer>
+
+  <!-- cart drawer (shared) -->
+  <aside id="site-cart" class="site-cart" role="dialog" aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart-inner">
+      <header class="cart-head">
+        <h3>Your cart</h3>
+        <button class="cart-close" aria-label="Close cart">×</button>
+      </header>
+      <div id="cart-items" class="cart-items" role="list"> <!-- populated by JS -->
+        <p class="muted small">Your cart is empty.</p>
+      </div>
+      <footer class="cart-foot">
+        <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+        <div class="cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+        <div class="cart-actions">
+          <button class="btn" id="checkout-btn">Checkout (demo)</button>
+        </div>
+      </footer>
+    </div>
+    <div id="cart-toast" class="cart-toast" aria-live="polite"></div>
+  </aside>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

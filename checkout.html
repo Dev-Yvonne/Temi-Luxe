@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout — Temi Luxe</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Temi Luxe home"><img src="assets/logo.svg" alt="Temi Luxe logo"></a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container" style="max-width:980px">
+      <h1>Checkout</h1>
+      <div class="checkout-grid">
+        <form id="checkout-form" class="checkout-form" novalidate>
+          <fieldset>
+            <legend>Customer details</legend>
+            <label>Full name<input name="name" id="c-name" required></label>
+            <label>Email<input name="email" id="c-email" type="email" required></label>
+            <label>Phone<input name="phone" id="c-phone" type="tel"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Delivery address</legend>
+            <label>Address line 1<input name="addr1" id="c-addr1" required></label>
+            <label>Address line 2<input name="addr2" id="c-addr2"></label>
+            <label>City<input name="city" id="c-city" required></label>
+            <label>Postal code<input name="zip" id="c-zip" required></label>
+            <label>Country<select id="c-country" name="country"><option>United States</option><option>United Kingdom</option><option>Other</option></select></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Delivery options</legend>
+            <label><input type="radio" name="delivery" value="standard" checked> Standard — 3–5 days (free)</label>
+            <label><input type="radio" name="delivery" value="express"> Express — 1–2 days (+$12)</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment method (demo)</legend>
+            <label><input type="radio" name="pay-method" value="card" checked> Card (demo — not processed)</label>
+            <label><input type="radio" name="pay-method" value="paypal"> PayPal (mock)</label>
+            <div id="card-fields" style="margin-top:.5rem">
+              <label>Card number<input id="card-number" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242"></label>
+              <div style="display:flex;gap:.5rem"><label style="flex:1">Expiry<input id="card-exp" placeholder="MM/YY"></label><label style="flex:1">CVC<input id="card-cvc" placeholder="123"></label></div>
+            </div>
+          </fieldset>
+
+          <div style="margin-top:1rem;display:flex;gap:.75rem;align-items:center">
+            <button class="btn btn-primary" id="place-order">Place order (demo)</button>
+            <a class="btn btn-ghost" href="index.html">Continue shopping</a>
+          </div>
+          <p id="checkout-msg" class="muted small" aria-live="polite" style="margin-top:.6rem"></p>
+        </form>
+
+        <aside class="order-summary">
+          <h2>Order summary</h2>
+          <div id="summary-items">(loading cart...)</div>
+          <div class="summary-totals" style="margin-top:1rem">
+            <div><span>Subtotal</span><strong id="summary-subtotal">$0.00</strong></div>
+            <div><span>Shipping</span><strong id="summary-shipping">$0.00</strong></div>
+            <div><span>Total</span><strong id="summary-total">$0.00</strong></div>
+          </div>
+        </aside>
+      </div>
+
+      <section id="order-confirm" class="pad-top" hidden>
+        <h2>Order confirmation</h2>
+        <p id="order-number"></p>
+        <p id="order-details"></p>
+        <p><a class="btn" href="index.html">Return to shop</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© Temi Luxe — Crafted with care.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    const CART_KEY = 'tl_cart_v1';
+    const money = v => '$' + Number(v).toFixed(2);
+    const readCart = ()=> JSON.parse(localStorage.getItem(CART_KEY) || '{"items":[]}');
+
+    const itemsWrap = document.getElementById('summary-items');
+    const subEl = document.getElementById('summary-subtotal');
+    const shipEl = document.getElementById('summary-shipping');
+    const totalEl = document.getElementById('summary-total');
+    const form = document.getElementById('checkout-form');
+    const placeBtn = document.getElementById('place-order');
+    const msg = document.getElementById('checkout-msg');
+    const confirmSection = document.getElementById('order-confirm');
+    const orderNumberEl = document.getElementById('order-number');
+    const orderDetailsEl = document.getElementById('order-details');
+
+    function renderSummary(){
+      const cart = readCart();
+      if(!cart.items || cart.items.length === 0){ itemsWrap.innerHTML = '<p class="muted small">Your cart is empty.</p>'; placeBtn.disabled = true; return; }
+      itemsWrap.innerHTML = cart.items.map(i=>`<div class="summary-row"><div>${i.name} <small class="muted">(${i.color})</small></div><div>${money(i.price)} × ${i.qty} = <strong>${money(i.price * i.qty)}</strong></div></div>`).join('');
+      const subtotal = cart.items.reduce((s,i)=>s + (i.price * i.qty),0);
+      subEl.textContent = money(subtotal);
+      // default shipping
+      const shipping = document.querySelector('input[name="delivery"]:checked') && document.querySelector('input[name="delivery"]:checked').value === 'express' ? 12 : 0;
+      shipEl.textContent = money(shipping);
+      totalEl.textContent = money(subtotal + shipping);
+      placeBtn.disabled = false;
+    }
+
+    // update totals when delivery option changes
+    document.querySelectorAll('input[name="delivery"]').forEach(r=> r.addEventListener('change', ()=> renderSummary()));
+
+    renderSummary();
+
+    // simple form validation + place order (demo)
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      msg.textContent = '';
+      const required = ['c-name','c-email','c-addr1','c-city','c-zip'];
+      for(const id of required){ if(!document.getElementById(id).value.trim()){ msg.textContent = 'Please complete required fields.'; return; } }
+      // ensure cart still has items
+      const cart = readCart();
+      if(!cart.items || cart.items.length === 0){ msg.textContent = 'Your cart is empty.'; return; }
+
+      // mock payment validation
+      const pay = document.querySelector('input[name="pay-method"]:checked').value;
+      if(pay === 'card'){
+        const cnum = document.getElementById('card-number').value.replace(/\s+/g,'');
+        if(!cnum || cnum.length < 12){ msg.textContent = 'Please enter a valid card number (demo).'; return; }
+      }
+
+      // place order (demo): generate order id, clear cart, show confirmation
+      const orderId = 'TL' + Date.now().toString(36).toUpperCase().slice(-8);
+      localStorage.removeItem(CART_KEY);
+      renderSummary();
+      confirmSection.hidden = false;
+      orderNumberEl.textContent = 'Order number: ' + orderId;
+      orderDetailsEl.innerHTML = '<strong>Shipping to:</strong> ' + document.getElementById('c-name').value + ', ' + document.getElementById('c-addr1').value + ', ' + document.getElementById('c-city').value + ' — ' + document.getElementById('c-zip').value + '<br><strong>Total:</strong> ' + totalEl.textContent + '<br><em>This is a demo order — no payment was processed.</em>';
+      // friendly message
+      msg.textContent = '';
+      placeBtn.disabled = true;
+    });
+
+    // small UX: toggle card fields visibility depending on payment method
+    document.querySelectorAll('input[name="pay-method"]').forEach(r=> r.addEventListener('change', ()=>{
+      document.getElementById('card-fields').style.display = (document.querySelector('input[name="pay-method"]:checked').value === 'card') ? 'block' : 'none';
+    }));
+  })();
+  </script>
+</body>
+</html>

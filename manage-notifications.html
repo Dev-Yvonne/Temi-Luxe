@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manage Notifications — Temi Luxe (demo)</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Temi Luxe home"><img src="assets/logo.svg" alt="Temi Luxe logo"></a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h2>Manage saved notification requests (demo)</h2>
+      <p class="muted">Saved locally in your browser (localStorage). Use the buttons to remove entries or export them as JSON.</p>
+
+      <div id="manage-notifies" class="manage-notifies">
+        <!-- populated by JS -->
+        <p class="muted">Loading…</p>
+      </div>
+
+      <div style="margin-top:1rem;display:flex;gap:.6rem;align-items:center">
+        <button id="export-notifies" class="btn">Export as JSON</button>
+        <button id="clear-notifies" class="btn btn-ghost">Clear all</button>
+        <p id="manage-msg" class="muted small" style="margin-left:8px"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© Temi Luxe — Crafted with care.</p>
+      <p class="muted">Back to — <a href="index.html">Shop</a></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

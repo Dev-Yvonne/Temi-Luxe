@@ -1,0 +1,62 @@
+[
+  {
+    "id": "clutch-001",
+    "name": "Classic Clutch",
+    "price": 240,
+    "stock": 6,
+    "colors": ["tan","black","oxblood"],
+    "desc": "Hand-stitched Italian leather — refined, compact silhouette.",
+    "images": ["assets/clutch-1.svg","assets/clutch-2.svg","assets/clutch-3.svg"],
+    "imagesHigh": ["assets/clutch-1@2x.svg","assets/clutch-2@2x.svg","assets/clutch-3@2x.svg"]
+  },
+  {
+    "id": "belt-002",
+    "name": "Signature Belt",
+    "price": 180,
+    "stock": 12,
+    "colors": ["tan","black"],
+    "desc": "Antique brass buckle — made to last.",
+    "images": ["assets/belt-1.svg","assets/belt-2.svg"],
+    "imagesHigh": ["assets/belt-1@2x.svg","assets/belt-2@2x.svg"]
+  },
+  {
+    "id": "tote-003",
+    "name": "Everyday Tote",
+    "price": 320,
+    "stock": 4,
+    "colors": ["black","stone"],
+    "desc": "Roomy, structured, elegant.",
+    "images": ["assets/tote-1.svg","assets/tote-2.svg"],
+    "imagesHigh": ["assets/tote-1@2x.svg","assets/tote-2@2x.svg"]
+  },
+  {
+    "id": "wallet-004",
+    "name": "Mini Wallet",
+    "price": 95,
+    "stock": 0,
+    "colors": ["black","oxblood"],
+    "desc": "Slim profile — RFID lining.",
+    "images": ["assets/wallet-1.svg","assets/wallet-2.svg"],
+    "imagesHigh": ["assets/wallet-1@2x.svg","assets/wallet-2@2x.svg"]
+  },
+  {
+    "id": "earrings-005",
+    "name": "Petite Hoops",
+    "price": 120,
+    "stock": 8,
+    "colors": ["gold","silver"],
+    "desc": "Lightweight artisan hoops — polished finish.",
+    "images": ["assets/earrings-1.svg","assets/earrings-2.svg"],
+    "imagesHigh": ["assets/earrings-1@2x.svg","assets/earrings-2@2x.svg"]
+  },
+  {
+    "id": "ring-006",
+    "name": "Signet Ring",
+    "price": 150,
+    "stock": 5,
+    "colors": ["gold","silver"],
+    "desc": "Bold low-profile signet.",
+    "images": ["assets/ring-1.svg","assets/ring-2.svg"],
+    "imagesHigh": ["assets/ring-1@2x.svg","assets/ring-2@2x.svg"]
+  }
+]
