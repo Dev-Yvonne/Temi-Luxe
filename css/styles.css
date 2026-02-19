@@ -13,7 +13,7 @@
 *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:var(--ff-sans);color:var(--text);background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.45}
 .container{max-width:var(--max-width);margin:0 auto;padding:1.25rem}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.5rem 0}
-.logo img{height:64px;width:64px;object-fit:cover;border-radius:50%;border:2.5px solid var(--gold);box-shadow:0 2px 12px rgba(201,161,91,0.18)}
+.logo img{height:64px;width:auto}
 .site-nav{position:relative}
 .nav-toggle{display:none;background:transparent;border:1px solid transparent;padding:.4rem .6rem;border-radius:8px}
 .nav-list{list-style:none;margin:0;padding:0;display:flex;gap:1rem;align-items:center}
