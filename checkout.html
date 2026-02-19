@@ -189,19 +189,19 @@
 I hope this message finds you well. I am writing to formally place a purchase order for the items listed below, and I kindly request confirmation of availability and payment arrangements at your earliest convenience.
 
 ━━━━━━━━━━━━━━━━━━━━━━
-🧾 ORDER REQUEST — ${date}
+ORDER REQUEST — ${date}
 ━━━━━━━━━━━━━━━━━━━━━━
 
-👤 CUSTOMER DETAILS
+CUSTOMER DETAILS
 Name:     ${name}
 Phone:    ${phone || 'N/A'}
 City:     ${city}
 Address:  ${addr}${notes ? `\nNotes:    ${notes}` : ''}
 
-🛍️ ORDER ITEMS
+ORDER ITEMS
 ${itemLines}
 
-💳 ORDER SUMMARY
+ORDER SUMMARY
 Subtotal:   ${money(subtotal)}
 Shipping:   ${deliveryLabel}
 *TOTAL:     ${money(total)}*
