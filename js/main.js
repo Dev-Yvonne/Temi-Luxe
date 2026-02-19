@@ -57,20 +57,28 @@ document.addEventListener('DOMContentLoaded', function(){
     cartCountEl.textContent = totalQty;
     cartStatus.textContent = `${totalQty} item${totalQty!==1? 's':''} in cart`;
 
-    // update subtotal and total (total currently same as subtotal — extend later if needed)
     const subtotalEl = document.getElementById('cart-subtotal');
     if(subtotalEl) subtotalEl.textContent = money(subtotal);
     if(cartTotalEl) cartTotalEl.textContent = money(subtotal);
 
-    // disable checkout when empty
     const checkoutBtn = document.getElementById('checkout-btn');
-    if(checkoutBtn) checkoutBtn.disabled = cart.items.length === 0;  // navigate to checkout page (demo)
-  if(checkoutBtn){
-    checkoutBtn.addEventListener('click', ()=>{
+    if(checkoutBtn) checkoutBtn.disabled = cart.items.length === 0;
+  }
+
+  // wire checkout button once
+  const _checkoutBtn = document.getElementById('checkout-btn');
+  if(_checkoutBtn){
+    _checkoutBtn.addEventListener('click', ()=>{
       if(document.getElementById('site-cart')) showCart(false);
       window.location.href = 'checkout.html';
     });
-  }  }
+  }
+
+  function getProductImage(id){
+    const p = getProduct(id);
+    if(p && p.images && p.images[0]) return p.images[0];
+    return 'assets/logo.png';
+  }
 
   function renderCart(){
     const cart = readCart();
@@ -85,22 +93,19 @@ document.addEventListener('DOMContentLoaded', function(){
       const stock = getStockFor(item.id);
       const el = document.createElement('div'); el.className = 'cart-item';
       el.innerHTML = `
-        <div class="media"><img src="assets/product-placeholder.svg" alt="${item.name}" width="64"></div>
-        <div style="flex:1">
+        <div class="media"><img src="${getProductImage(item.id)}" alt="${item.name}"></div>
+        <div>
           <h4>${item.name}</h4>
-          <div class="meta">${item.color} ${isFinite(stock) ? '• ' + stock + ' in stock' : ''}</div>
+          <div class="meta">${item.color}${isFinite(stock) ? ' · ' + stock + ' in stock' : ''}</div>
           <div class="cart-qty-controls">
-            <button class="qty-decr" data-id="${item.id}" aria-label="Decrease quantity">−</button>
-            <input class="cart-qty-input" data-id="${item.id}" type="number" min="1" value="${item.qty}" aria-label="Quantity for ${item.name}">
-            <button class="qty-incr" data-id="${item.id}" aria-label="Increase quantity">+</button>
+            <button class="qty-decr" data-id="${item.id}" aria-label="Decrease">−</button>
+            <input class="cart-qty-input" data-id="${item.id}" type="number" min="1" value="${item.qty}" aria-label="Qty">
+            <button class="qty-incr" data-id="${item.id}" aria-label="Increase">+</button>
           </div>
-          ${isFinite(stock) ? (item.qty >= stock ? '<div class="muted small" style="margin-top:.35rem">Max available in cart</div>' : '') : ''}
+          ${isFinite(stock) && item.qty >= stock ? '<div class="muted small" style="margin-top:.3rem;font-size:.78rem">Max stock reached</div>' : ''}
+          <button class="remove" data-id="${item.id}">✕ Remove</button>
         </div>
-        <div style="text-align:right;min-width:90px">
-          <div><small class="muted">Unit</small><div>${money(item.price)}</div></div>
-          <div style="margin-top:.6rem"><small class="muted">Subtotal</small><div><strong class="line-total">${money(item.price * item.qty)}</strong></div></div>
-          <div style="margin-top:.4rem"><button class="remove" data-id="${item.id}">Remove</button></div>
-        </div>
+        <div class="cart-item-price">${money(item.price * item.qty)}</div>
       `;
       cartItemsEl.appendChild(el);
     });
@@ -108,11 +113,17 @@ document.addEventListener('DOMContentLoaded', function(){
     updateCartSummary(cart);
   }
 
+  const cartOverlay = document.getElementById('cart-overlay');
+
   function showCart(open = true){
     cartPanel.setAttribute('aria-hidden', String(!open));
     cartToggle && cartToggle.setAttribute('aria-expanded', String(open));
+    if(cartOverlay) cartOverlay.classList.toggle('visible', open);
+    document.body.style.overflow = open ? 'hidden' : '';
     if(open) renderCart();
   }
+
+  cartOverlay && cartOverlay.addEventListener('click', ()=> showCart(false));
 
   // ensure cart does not exceed stock on load (clamps quantities)
   function validateCartAgainstStock(){
@@ -398,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function(){
         return pic;
       };
 
-      // populate homepage/product-cards — replace simple <img> with <picture> when possible
+      // populate homepage/product-cards — update img src from products.json
       document.querySelectorAll('.product-card').forEach(card=>{
         const id = card.dataset.id;
         const imgWrapper = card.querySelector('.product-media');
@@ -406,17 +417,13 @@ document.addEventListener('DOMContentLoaded', function(){
         const prod = byId[id];
         if(!prod || !imgEl) return;
 
-        const src = prod.images && prod.images[0] ? prod.images[0] : imgEl.src;
-        const high = prod.imagesHigh && prod.imagesHigh[0] ? prod.imagesHigh[0] : '';
-        const webp = (prod.imagesWebp && prod.imagesWebp[0]) ? prod.imagesWebp[0] : src.replace(/\.(jpe?g|png)$/i, '.webp');
-
-        // build picture: webp (if available) then fallback jpeg/png
-        const pic = makePicture([
-          {type: 'image/webp', src: high ? [webp + ' 1x', high.replace(/\.(jpe?g|png)$/i, '.webp') + ' 2x'] : [webp]},
-          {type: 'image/jpeg', src: high ? [src + ' 1x', high + ' 2x'] : [src]}
-        ], src, imgEl.alt || prod.name || '');
-
-        imgWrapper.replaceChild(pic, imgEl);
+        const src = prod.images && prod.images[0] ? prod.images[0] : null;
+        if(src){
+          imgEl.src = src;
+          imgEl.alt = imgEl.alt || prod.name || '';
+          imgEl.loading = 'lazy';
+          imgEl.decoding = 'async';
+        }
 
         // disable add-to-cart on homepage if stock is zero (and show notify option)
         const addBtn = card.querySelector('.add-to-cart');
@@ -449,31 +456,17 @@ document.addEventListener('DOMContentLoaded', function(){
         const galleryCurrent = document.getElementById('gallery-current');
         const thumbsWrap = document.querySelector('.gallery-thumbs');
         if(prod && galleryCurrent){
-          const src = prod.images && prod.images[0] ? prod.images[0] : galleryCurrent.src;
-          const high = prod.imagesHigh && prod.imagesHigh[0] ? prod.imagesHigh[0] : galleryCurrent.dataset.highres || '';
-          const webp = (prod.imagesWebp && prod.imagesWebp[0]) ? prod.imagesWebp[0] : src.replace(/\.(jpe?g|png)$/i, '.webp');
+          const firstSrc = prod.images && prod.images[0] ? prod.images[0] : null;
+          if(firstSrc){
+            galleryCurrent.src = firstSrc;
+            galleryCurrent.alt = prod.name || '';
+            galleryCurrent.dataset.highres = firstSrc;
+          }
 
-          // replace the main image with a picture element that includes webp
-          const picMain = makePicture([
-            {type: 'image/webp', src: high ? [webp + ' 1x', high.replace(/\.(jpe?g|png)$/i, '.webp') + ' 2x'] : [webp]},
-            {type: 'image/jpeg', src: high ? [src + ' 1x', high + ' 2x'] : [src]}
-          ], src, galleryCurrent.alt || prod.name || '');
-          galleryCurrent.parentElement.replaceChild(picMain, galleryCurrent);
-          // ensure the new img is accessible to the rest of the gallery code
-          const newImg = picMain.querySelector('img');
-          newImg.id = 'gallery-current';
-          newImg.dataset.highres = high;
-
-          if(thumbsWrap){
+          if(thumbsWrap && prod.images && prod.images.length){
             thumbsWrap.innerHTML = prod.images.map((src, i)=>{
-              const highSrc = (prod.imagesHigh && prod.imagesHigh[i]) ? prod.imagesHigh[i] : '';
-              const webpSrc = (prod.imagesWebp && prod.imagesWebp[i]) ? prod.imagesWebp[i] : src.replace(/\.(jpe?g|png)$/i, '.webp');
-              // include webp on the thumbnail img via srcset for browsers that support it
-              return `<button class="thumb" data-src="${src}" data-highres="${highSrc}" aria-label="View image ${i+1}">
-                        <picture>
-                          <source type="image/webp" srcset="${webpSrc}">
-                          <img src="${src}" alt="" loading="lazy">
-                        </picture>
+              return `<button class="thumb" data-src="${src}" data-highres="${src}" aria-label="View image ${i+1}">
+                        <img src="${src}" alt="" loading="lazy">
                       </button>`;
             }).join('');
           }

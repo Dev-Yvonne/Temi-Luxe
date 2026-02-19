@@ -12,7 +12,7 @@
 <body>
   <header class="site-header" role="banner">
     <div class="container header-inner">
-      <a class="logo" href="#" aria-label="Temi Luxe home"><img src="assets/logo.svg" alt="Temi Luxe logo"></a>
+      <a class="logo" href="#" aria-label="Temi Luxe home"><img src="assets/logo.png" alt="Temi Luxe logo"></a>
       <nav class="site-nav" aria-label="Primary">
         <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
         <ul id="primary-navigation" class="nav-list">
@@ -24,7 +24,7 @@
       </nav>
       <div class="header-actions">
         <button class="cart-toggle" aria-expanded="false" aria-controls="site-cart" aria-label="Open cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l.9 5.5a3 3 0 0 0 3 2.5h7.2a3 3 0 0 0 3-2.5L21 6H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span class="cart-count" aria-hidden="true">0</span>
         </button>
         <span id="cart-status" class="sr-only" aria-live="polite">0 items in cart</span>
@@ -44,7 +44,7 @@
           </p>
         </div>
         <div class="hero-media" aria-hidden="true">
-          <img src="assets/hero.svg" alt="Decorative product composition">
+          <img src="assets/hero%20section.png" alt="Decorative product composition">
         </div>
       </div>
     </section>
@@ -56,7 +56,7 @@
         <div class="products-grid" id="shop" role="list">
 
           <article class="product-card" role="listitem" data-id="clutch-001" data-name="Classic Clutch" data-price="240" data-colors="tan,black,oxblood" data-desc="Hand-stitched Italian leather — 3 colorways">
-            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Classic clutch"></div>
+            <div class="product-media"><img src="assets/hero%20section.png" alt="Classic clutch"></div>
             <div class="product-body">
               <h3 class="product-name">Classic Clutch</h3>
               <p class="price">$240</p>
@@ -91,7 +91,7 @@
           </article>
 
           <article class="product-card" role="listitem" data-id="belt-002" data-name="Signature Belt" data-price="180" data-colors="tan,black" data-desc="Antique brass buckle — made to last">
-            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Signature belt"></div>
+            <div class="product-media"><img src="assets/logo.png" alt="Signature belt"></div>
             <div class="product-body">
               <h3 class="product-name">Signature Belt</h3>
               <p class="price">$180</p>
@@ -113,7 +113,7 @@
           </article>
 
           <article class="product-card" role="listitem" data-id="tote-003" data-name="Everyday Tote" data-price="320" data-colors="black,stone" data-desc="Roomy, structured, elegant">
-            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Everyday tote"></div>
+            <div class="product-media"><img src="assets/hero%20section.png" alt="Everyday tote"></div>
             <div class="product-body">
               <h3 class="product-name">Everyday Tote</h3>
               <p class="price">$320</p>
@@ -135,7 +135,7 @@
           </article>
 
           <article class="product-card" role="listitem" data-id="wallet-004" data-name="Mini Wallet" data-price="95" data-colors="black,oxblood" data-desc="Slim profile — RFID lining">
-            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Mini wallet"></div>
+            <div class="product-media"><img src="assets/logo.png" alt="Mini wallet"></div>
             <div class="product-body">
               <h3 class="product-name">Mini Wallet</h3>
               <p class="price">$95</p>
@@ -158,7 +158,7 @@
 
           <!-- new products: Earrings + Ring -->
           <article class="product-card" role="listitem" data-id="earrings-005" data-name="Petite Hoops" data-price="120" data-colors="gold,silver" data-desc="Lightweight artisan hoops">
-            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Petite Hoops"></div>
+            <div class="product-media"><img src="assets/hero%20section.png" alt="Petite Hoops"></div>
             <div class="product-body">
               <h3 class="product-name">Petite Hoops</h3>
               <p class="price">$120</p>
@@ -180,7 +180,7 @@
           </article>
 
           <article class="product-card" role="listitem" data-id="ring-006" data-name="Signet Ring" data-price="150" data-colors="gold,silver" data-desc="Bold low-profile signet">
-            <div class="product-media"><img src="assets/product-placeholder.svg" alt="Signet Ring"></div>
+            <div class="product-media"><img src="assets/logo.png" alt="Signet Ring"></div>
             <div class="product-body">
               <h3 class="product-name">Signet Ring</h3>
               <p class="price">$150</p>
@@ -239,26 +239,39 @@
     </div>
   </footer>
 
+  <!-- Cart overlay -->
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+
   <!-- Cart drawer -->
   <aside id="site-cart" class="site-cart" role="dialog" aria-label="Shopping cart" aria-hidden="true">
     <div class="cart-inner">
       <header class="cart-head">
-        <h3>Your cart</h3>
-        <button class="cart-close" aria-label="Close cart">×</button>
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 style="margin:0;font-size:1.05rem;font-weight:600">Your Cart</h3>
+        </div>
+        <button class="cart-close" aria-label="Close cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
       </header>
-      <div id="cart-items" class="cart-items" role="list"> <!-- populated by JS -->
+
+      <div id="cart-items" class="cart-items" role="list">
         <p class="muted small">Your cart is empty.</p>
       </div>
+
       <footer class="cart-foot">
         <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
         <div class="cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+        <p style="font-size:.8rem;color:var(--muted);margin:.2rem 0 .6rem">Shipping calculated at checkout</p>
         <div class="cart-actions">
-          <button class="btn" id="checkout-btn">Checkout (demo)</button>
+          <button class="btn btn-primary" id="checkout-btn" style="flex:1;text-align:center;padding:.7rem">Proceed to Checkout</button>
         </div>
+        <a href="index.html#shop" class="cart-continue">← Continue shopping</a>
       </footer>
     </div>
-    <div id="cart-toast" class="cart-toast" aria-live="polite"></div>
   </aside>
+
+  <div id="cart-toast" class="cart-toast" aria-live="polite"></div>
 
   <script src="js/main.js" defer></script>
 </body>

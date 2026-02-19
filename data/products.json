@@ -6,8 +6,8 @@
     "stock": 6,
     "colors": ["tan","black","oxblood"],
     "desc": "Hand-stitched Italian leather — refined, compact silhouette.",
-    "images": ["assets/clutch-1.svg","assets/clutch-2.svg","assets/clutch-3.svg"],
-    "imagesHigh": ["assets/clutch-1@2x.svg","assets/clutch-2@2x.svg","assets/clutch-3@2x.svg"]
+    "images": ["assets/hero%20section.png", "assets/logo.png"],
+    "imagesHigh": ["assets/hero%20section.png", "assets/logo.png"]
   },
   {
     "id": "belt-002",
@@ -16,8 +16,8 @@
     "stock": 12,
     "colors": ["tan","black"],
     "desc": "Antique brass buckle — made to last.",
-    "images": ["assets/belt-1.svg","assets/belt-2.svg"],
-    "imagesHigh": ["assets/belt-1@2x.svg","assets/belt-2@2x.svg"]
+    "images": ["assets/logo.png", "assets/hero%20section.png"],
+    "imagesHigh": ["assets/logo.png", "assets/hero%20section.png"]
   },
   {
     "id": "tote-003",
@@ -26,8 +26,8 @@
     "stock": 4,
     "colors": ["black","stone"],
     "desc": "Roomy, structured, elegant.",
-    "images": ["assets/tote-1.svg","assets/tote-2.svg"],
-    "imagesHigh": ["assets/tote-1@2x.svg","assets/tote-2@2x.svg"]
+    "images": ["assets/hero%20section.png", "assets/logo.png"],
+    "imagesHigh": ["assets/hero%20section.png", "assets/logo.png"]
   },
   {
     "id": "wallet-004",
@@ -36,8 +36,8 @@
     "stock": 0,
     "colors": ["black","oxblood"],
     "desc": "Slim profile — RFID lining.",
-    "images": ["assets/wallet-1.svg","assets/wallet-2.svg"],
-    "imagesHigh": ["assets/wallet-1@2x.svg","assets/wallet-2@2x.svg"]
+    "images": ["assets/logo.png", "assets/hero%20section.png"],
+    "imagesHigh": ["assets/logo.png", "assets/hero%20section.png"]
   },
   {
     "id": "earrings-005",
@@ -46,8 +46,8 @@
     "stock": 8,
     "colors": ["gold","silver"],
     "desc": "Lightweight artisan hoops — polished finish.",
-    "images": ["assets/earrings-1.svg","assets/earrings-2.svg"],
-    "imagesHigh": ["assets/earrings-1@2x.svg","assets/earrings-2@2x.svg"]
+    "images": ["assets/hero%20section.png", "assets/logo.png"],
+    "imagesHigh": ["assets/hero%20section.png", "assets/logo.png"]
   },
   {
     "id": "ring-006",
@@ -56,7 +56,7 @@
     "stock": 5,
     "colors": ["gold","silver"],
     "desc": "Bold low-profile signet.",
-    "images": ["assets/ring-1.svg","assets/ring-2.svg"],
-    "imagesHigh": ["assets/ring-1@2x.svg","assets/ring-2@2x.svg"]
+    "images": ["assets/logo.png", "assets/hero%20section.png"],
+    "imagesHigh": ["assets/logo.png", "assets/hero%20section.png"]
   }
 ]

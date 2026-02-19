@@ -4,12 +4,221 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Checkout — Temi Luxe</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .checkout-grid{display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start}
+    .checkout-form fieldset{border:1px solid rgba(16,16,16,0.07);padding:1rem 1.1rem;border-radius:12px;margin-bottom:1rem;background:#fafafa}
+    .checkout-form legend{font-weight:600;font-size:.95rem;padding:0 .4rem}
+    .checkout-form label{display:block;font-size:.9rem;color:#555;margin-bottom:.7rem}
+    .checkout-form input,.checkout-form select,.checkout-form textarea{display:block;width:100%;margin-top:.25rem;padding:.55rem .75rem;border-radius:9px;border:1px solid #e0dbd5;font-family:inherit;font-size:.95rem;background:#fff;transition:border-color .15s}
+    .checkout-form input:focus,.checkout-form select:focus,.checkout-form textarea:focus{outline:none;border-color:var(--gold)}
+    .checkout-form textarea{resize:vertical;min-height:72px}
+    .radio-group label{display:flex;align-items:center;gap:.6rem;font-size:.9rem;padding:.4rem 0}
+    .order-summary{background:#fff;padding:1.25rem;border-radius:14px;border:1px solid rgba(16,16,16,0.07);position:sticky;top:80px}
+    .order-summary h2{font-family:var(--ff-serif);margin:0 0 .85rem;font-size:1.25rem}
+    .summary-item{display:flex;justify-content:space-between;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(16,16,16,0.05);font-size:.9rem;gap:.5rem}
+    .summary-item .name{flex:1;color:#333}
+    .summary-item .amt{font-weight:600;white-space:nowrap}
+    .summary-divider{border:none;border-top:1px dashed rgba(16,16,16,0.1);margin:.75rem 0}
+    .summary-line{display:flex;justify-content:space-between;font-size:.9rem;padding:.25rem 0;color:var(--muted)}
+    .summary-total-line{display:flex;justify-content:space-between;font-weight:700;font-size:1rem;padding:.4rem 0;margin-top:.25rem}
+    .wa-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.8rem;border:none;border-radius:11px;background:#25D366;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:background .18s;font-family:inherit}
+    .wa-btn:hover{background:#1ebe5d}
+    .wa-btn:disabled{background:#a8d5b8;cursor:not-allowed}
+    .wa-btn svg{flex-shrink:0}
+    .empty-cart-msg{padding:1.5rem;text-align:center;color:var(--muted)}
+    #checkout-msg{margin-top:.6rem;font-size:.9rem}
+    .confirm-box{background:#f0faf4;border:1px solid #b2e0c4;border-radius:12px;padding:1.25rem;margin-top:1.5rem}
+    .confirm-box h2{color:#1a7a3f;font-family:var(--ff-serif);margin:0 0 .5rem}
+    @media(max-width:880px){.checkout-grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
   <header class="site-header" role="banner">
     <div class="container header-inner">
-      <a class="logo" href="index.html" aria-label="Temi Luxe home"><img src="assets/logo.svg" alt="Temi Luxe logo"></a>
+      <a class="logo" href="index.html" aria-label="Temi Luxe home"><img src="assets/logo.png" alt="Temi Luxe logo"></a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container" style="max-width:1000px">
+      <a class="back-link" href="index.html#shop"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Back to shop</a>
+      <h1 style="font-family:var(--ff-serif);margin:.25rem 0 1.5rem">Checkout</h1>
+
+      <div class="checkout-grid">
+        <form id="checkout-form" class="checkout-form" novalidate>
+
+          <fieldset>
+            <legend>Your details</legend>
+            <label>Full name *<input name="name" id="c-name" required placeholder="e.g. Jane Doe"></label>
+            <label>Phone number *<input name="phone" id="c-phone" type="tel" required placeholder="e.g. +254 700 000 000"></label>
+            <label>Email <span style="color:var(--muted)">(optional)</span><input name="email" id="c-email" type="email" placeholder="jane@example.com"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Delivery address</legend>
+            <label>Address / Area *<input name="addr1" id="c-addr1" required placeholder="Street, estate or area"></label>
+            <label>City / Town *<input name="city" id="c-city" required placeholder="e.g. Nairobi"></label>
+            <label>Additional notes <span style="color:var(--muted)">(optional)</span><textarea name="notes" id="c-notes" placeholder="Any special delivery instructions..."></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Delivery option</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="delivery" value="standard" checked> Standard delivery — Free (3–5 days)</label>
+              <label><input type="radio" name="delivery" value="express"> Express delivery — +$12 (1–2 days)</label>
+            </div>
+          </fieldset>
+
+          <p id="checkout-msg" class="muted" aria-live="polite"></p>
+
+          <button class="wa-btn" type="submit" id="place-order">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </button>
+          <p style="font-size:.82rem;color:var(--muted);margin-top:.5rem;text-align:center">You'll be redirected to WhatsApp to confirm your order with us.</p>
+        </form>
+
+        <aside class="order-summary">
+          <h2>Order summary</h2>
+          <div id="summary-items"><p class="muted small">Loading...</p></div>
+          <hr class="summary-divider">
+          <div class="summary-line"><span>Subtotal</span><span id="summary-subtotal">$0.00</span></div>
+          <div class="summary-line"><span>Shipping</span><span id="summary-shipping">Free</span></div>
+          <div class="summary-total-line"><span>Total</span><span id="summary-total">$0.00</span></div>
+        </aside>
+      </div>
+
+      <div id="order-confirm" class="confirm-box" hidden>
+        <h2>✓ Order sent!</h2>
+        <p id="order-details"></p>
+        <p style="margin-top:.75rem"><a class="btn btn-primary" href="index.html">Continue shopping</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="small">© 2026 Temi Luxe — Crafted with care.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    const CART_KEY = 'tl_cart_v1';
+    const WA_NUMBER = '254740621805';
+    const money = v => '$' + Number(v).toFixed(2);
+    const readCart = ()=> JSON.parse(localStorage.getItem(CART_KEY) || '{"items":[]}');
+
+    const itemsWrap  = document.getElementById('summary-items');
+    const subEl      = document.getElementById('summary-subtotal');
+    const shipEl     = document.getElementById('summary-shipping');
+    const totalEl    = document.getElementById('summary-total');
+    const form       = document.getElementById('checkout-form');
+    const placeBtn   = document.getElementById('place-order');
+    const msgEl      = document.getElementById('checkout-msg');
+    const confirmBox = document.getElementById('order-confirm');
+    const orderDetailsEl = document.getElementById('order-details');
+
+    function getShipping(){
+      const sel = document.querySelector('input[name="delivery"]:checked');
+      return sel && sel.value === 'express' ? 12 : 0;
+    }
+
+    function renderSummary(){
+      const cart = readCart();
+      if(!cart.items || cart.items.length === 0){
+        itemsWrap.innerHTML = '<p class="empty-cart-msg">Your cart is empty.<br><a href="index.html#shop">Browse products →</a></p>';
+        placeBtn.disabled = true;
+        return;
+      }
+      itemsWrap.innerHTML = cart.items.map(i=>`
+        <div class="summary-item">
+          <div class="name">${i.name} <span style="color:var(--muted);font-size:.82rem">(${i.color}) × ${i.qty}</span></div>
+          <div class="amt">${money(i.price * i.qty)}</div>
+        </div>`).join('');
+      const subtotal = cart.items.reduce((s,i)=>s + (i.price * i.qty), 0);
+      const shipping = getShipping();
+      subEl.textContent  = money(subtotal);
+      shipEl.textContent = shipping ? money(shipping) : 'Free';
+      totalEl.textContent = money(subtotal + shipping);
+      placeBtn.disabled = false;
+    }
+
+    document.querySelectorAll('input[name="delivery"]').forEach(r=> r.addEventListener('change', renderSummary));
+    renderSummary();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      msgEl.textContent = '';
+
+      const name  = document.getElementById('c-name').value.trim();
+      const phone = document.getElementById('c-phone').value.trim();
+      const addr  = document.getElementById('c-addr1').value.trim();
+      const city  = document.getElementById('c-city').value.trim();
+      const notes = document.getElementById('c-notes').value.trim();
+
+      if(!name || !phone || !addr || !city){
+        msgEl.textContent = 'Please fill in all required fields.';
+        msgEl.style.color = '#b03';
+        return;
+      }
+
+      const cart = readCart();
+      if(!cart.items || cart.items.length === 0){
+        msgEl.textContent = 'Your cart is empty.';
+        msgEl.style.color = '#b03';
+        return;
+      }
+
+      const shipping = getShipping();
+      const subtotal = cart.items.reduce((s,i)=>s + (i.price * i.qty), 0);
+      const total = subtotal + shipping;
+
+      // Build WhatsApp message
+      const itemLines = cart.items.map(i=>`  • ${i.name} (${i.color}) × ${i.qty} — ${money(i.price * i.qty)}`).join('\n');
+      const deliveryLabel = shipping ? `Express (+${money(shipping)})` : 'Standard (Free)';
+
+      const message =
+`Hello Temi Luxe! I'd like to place an order 🛍️
+
+*Customer details*
+Name: ${name}
+Phone: ${phone}
+City: ${city}
+Address: ${addr}${notes ? `\nNotes: ${notes}` : ''}
+
+*Order items*
+${itemLines}
+
+*Summary*
+Subtotal: ${money(subtotal)}
+Shipping: ${deliveryLabel}
+*Total: ${money(total)}*
+
+Please confirm availability and payment details. Thank you!`;
+
+      // Clear cart
+      localStorage.removeItem(CART_KEY);
+
+      // Show confirmation
+      confirmBox.hidden = false;
+      orderDetailsEl.innerHTML = `Your order has been sent to us on WhatsApp. We'll confirm shortly.<br><strong>Total: ${money(total)}</strong>`;
+      form.hidden = true;
+
+      // Open WhatsApp
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+    });
+  })();
+  </script>
+</body>
+</html>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Temi Luxe home"><img src="assets/logo.png" alt="Temi Luxe logo"></a>
     </div>
   </header>
 
