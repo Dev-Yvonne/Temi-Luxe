@@ -179,27 +179,39 @@
       const total = subtotal + shipping;
 
       // Build WhatsApp message
-      const itemLines = cart.items.map(i=>`  • ${i.name} (${i.color}) × ${i.qty} — ${money(i.price * i.qty)}`).join('\n');
-      const deliveryLabel = shipping ? `Express (+${money(shipping)})` : 'Standard (Free)';
+      const itemLines = cart.items.map((i,idx)=>`  ${idx+1}. ${i.name} (${i.color}) × ${i.qty}  —  ${money(i.price * i.qty)}`).join('\n');
+      const deliveryLabel = shipping ? `Express Delivery  —  +${money(shipping)}` : 'Standard Delivery  —  Free';
+      const date = new Date().toLocaleDateString('en-KE', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
 
       const message =
-`Hello Temi Luxe! I'd like to place an order 🛍️
+`Dear Temi Luxe Team,
 
-*Customer details*
-Name: ${name}
-Phone: ${phone}
-City: ${city}
-Address: ${addr}${notes ? `\nNotes: ${notes}` : ''}
+I hope this message finds you well. I am writing to formally place a purchase order for the items listed below, and I kindly request confirmation of availability and payment arrangements at your earliest convenience.
 
-*Order items*
+━━━━━━━━━━━━━━━━━━━━━━
+🧾 ORDER REQUEST — ${date}
+━━━━━━━━━━━━━━━━━━━━━━
+
+👤 CUSTOMER DETAILS
+Name:     ${name}
+Phone:    ${phone || 'N/A'}
+City:     ${city}
+Address:  ${addr}${notes ? `\nNotes:    ${notes}` : ''}
+
+🛍️ ORDER ITEMS
 ${itemLines}
 
-*Summary*
-Subtotal: ${money(subtotal)}
-Shipping: ${deliveryLabel}
-*Total: ${money(total)}*
+💳 ORDER SUMMARY
+Subtotal:   ${money(subtotal)}
+Shipping:   ${deliveryLabel}
+*TOTAL:     ${money(total)}*
 
-Please confirm availability and payment details. Thank you!`;
+━━━━━━━━━━━━━━━━━━━━━━
+
+I look forward to your prompt response and confirmation. Thank you for your time and excellent service.
+
+Warm regards,
+${name}`;
 
       // Clear cart
       localStorage.removeItem(CART_KEY);
