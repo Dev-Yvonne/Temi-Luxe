@@ -81,6 +81,8 @@
 
 .cart-toggle{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(16,16,16,0.08);padding:.45rem .65rem;border-radius:10px;cursor:pointer;transition:background .15s}
 .cart-toggle:hover{background:rgba(16,16,16,0.04)}
+.wa-header-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid rgba(37,211,102,0.25);color:#25D366;background:rgba(37,211,102,0.07);transition:background .15s,border-color .15s;text-decoration:none;flex-shrink:0}
+.wa-header-btn:hover{background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.5)}
 .cart-count{background:var(--gold);color:#fff;font-weight:700;padding:.1rem .42rem;border-radius:999px;font-size:.8rem;min-width:18px;text-align:center}
 .header-actions{display:flex;align-items:center;gap:.6rem}
 
@@ -159,6 +161,29 @@
 }
 .cart-fab:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(0,0,0,0.22)}
 .cart-fab:active{transform:scale(.97)}
+
+/* --- WhatsApp FAB --- */
+.wa-fab{
+  position:fixed;
+  bottom:5.25rem;
+  right:1.75rem;
+  z-index:58;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  box-shadow:0 6px 24px rgba(37,211,102,0.38);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s,box-shadow .18s;
+}
+.wa-fab:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(37,211,102,0.45)}
+.wa-fab:active{transform:scale(.97)}
 .cart-fab .cart-fab-count{
   position:absolute;
   top:-4px;
