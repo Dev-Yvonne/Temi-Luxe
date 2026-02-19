@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
   /* --- Cart: lightweight, DOM-driven, persists to localStorage --- */
   const CART_KEY = 'tl_cart_v1';
-  const cartToggle = document.querySelector('.cart-toggle');
+  const cartToggles = document.querySelectorAll('.cart-toggle, .cart-fab');
+  const cartCountEls = document.querySelectorAll('.cart-count, .cart-fab-count');
   const cartCountEl = document.querySelector('.cart-count');
   const cartStatus = document.getElementById('cart-status');
   const cartPanel = document.getElementById('site-cart');
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function updateCartSummary(cart){
     const totalQty = cart.items.reduce((s,i)=>s+i.qty,0);
     const subtotal = cart.items.reduce((s,i)=>s + (i.price * i.qty),0);
-    cartCountEl.textContent = totalQty;
+    cartCountEls.forEach(el => el.textContent = totalQty);
     cartStatus.textContent = `${totalQty} item${totalQty!==1? 's':''} in cart`;
 
     const subtotalEl = document.getElementById('cart-subtotal');
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function showCart(open = true){
     cartPanel.setAttribute('aria-hidden', String(!open));
-    cartToggle && cartToggle.setAttribute('aria-expanded', String(open));
+    cartToggles.forEach(t => t.setAttribute('aria-expanded', String(open)));
     if(cartOverlay) cartOverlay.classList.toggle('visible', open);
     document.body.style.overflow = open ? 'hidden' : '';
     if(open) renderCart();
@@ -146,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   // wire header/cart controls
-  cartToggle && cartToggle.addEventListener('click', ()=> showCart(cartPanel.getAttribute('aria-hidden') === 'true'));
+  cartToggles.forEach(t => t.addEventListener('click', ()=> showCart(cartPanel.getAttribute('aria-hidden') === 'true')));
   document.querySelectorAll('.cart-close').forEach(b=>b.addEventListener('click', ()=> showCart(false)));
 
   // add-to-cart handlers
