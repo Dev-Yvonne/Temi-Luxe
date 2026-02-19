@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
 
-  const money = v => '$' + Number(v).toFixed(2);
+  const money = v => 'KES ' + Number(v).toLocaleString('en-KE', {minimumFractionDigits: 0, maximumFractionDigits: 0});
   const readCart = ()=> JSON.parse(localStorage.getItem(CART_KEY) || '{"items":[]}');
   const writeCart = c => localStorage.setItem(CART_KEY, JSON.stringify(c));
 
