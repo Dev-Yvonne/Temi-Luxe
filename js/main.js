@@ -83,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function renderCart(){
     const cart = readCart();
+    // purge any stale items missing required fields
+    cart.items = cart.items.filter(i => i.id && i.name && i.name !== 'undefined' && i.price !== undefined);
+    writeCart(cart);
     cartItemsEl.innerHTML = '';
     if(cart.items.length === 0){
       cartItemsEl.innerHTML = '<p class="muted small">Your cart is empty.</p>';
@@ -104,7 +107,9 @@ document.addEventListener('DOMContentLoaded', function(){
             <button class="qty-incr" data-id="${item.id}" aria-label="Increase">+</button>
           </div>
           ${isFinite(stock) && item.qty >= stock ? '<div class="muted small" style="margin-top:.3rem;font-size:.78rem">Max stock reached</div>' : ''}
-          <button class="remove" data-id="${item.id}">✕ Remove</button>
+          <button class="remove" data-id="${item.id}" aria-label="Remove ${item.name} from cart" title="Remove item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </button>
         </div>
         <div class="cart-item-price">${money(item.price * item.qty)}</div>
       `;
